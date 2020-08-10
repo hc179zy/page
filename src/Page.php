@@ -77,7 +77,7 @@ class Page{
 				self::$pageInfo['page_head']=intval(1);
 			}
 			if(self::$showPlate['page_num']===true){
-				self::$pageInfo['page_num'][]=intval(self::$pageSep);
+				self::$pageInfo['page_num'][]=self::$pageSep;
 			}
 		}
 		if(self::$showPlate['page_num']===true){
@@ -88,7 +88,7 @@ class Page{
 				}elseif((self::$page+$now_roll_page-1)>=self::$totalPage){
 					$page=self::$totalPage-self::$rollNum+$i;
 				}else{
-					$page=self::$page-$now_cool_page_ceil+$i;
+					$page=self::$page-$now_roll_page_ceil+$i;
 				}
 				if($page>0 && $page!=self::$page){
 					if($page<=self::$totalPage){
