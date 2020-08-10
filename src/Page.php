@@ -68,7 +68,7 @@ class Page{
 		$now_roll_page=self::$rollNum/2;
 		$now_roll_page_ceil=ceil($now_roll_page);
 		//上一页
-		if(self::$page>1 && self::$totalPage>self::rollNum && self::$showPlate['page_pre']===true){
+		if(self::$page>1 && self::$totalPage>self::$rollNum && self::$showPlate['page_pre']===true){
 			self::$pageInfo['page_pre']=intval(self::$page-1);
 		}
 		//首页
