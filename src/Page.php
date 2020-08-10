@@ -13,14 +13,14 @@ class Page{
 		'page_num'	=>true,
         'page_nex'  =>true,
         'page_end'  =>true,
-        'page_total'=>true,
+        'page_total'=>false,
 	];
-	public static $pageinfo=[
-		'page_head' => false,
+	public static $pageInfo=[
         'page_pre'  => false,
+        'page_head' => false,
 		'page_num'	=>[],
+		'page_end'  => false,
         'page_nex'  => false,
-        'page_end'  => false,
         'page_total'=>false,
 	];
 	private static function setError($message=''):void {
@@ -40,7 +40,7 @@ class Page{
 		}
 		self::$totalNum=$totalNum;
 		self::$pageSize=$pageSize;
-		self::$totalPage=ceil($totalNum/$pagesize);
+		self::$totalPage=ceil($totalNum/$pageSize);
 		self::$page=$page;
 		self::getPageData();
 		return true;
@@ -69,15 +69,15 @@ class Page{
 		$now_roll_page_ceil=ceil($now_roll_page);
 		//上一页
 		if(self::$page>1 && self::$totalPage>self::rollNum && self::$showPlate['page_pre']===true){
-			self::$pageInfo['page_pre']=self::$page-1;
+			self::$pageInfo['page_pre']=intval(self::$page-1);
 		}
 		//首页
 		if(self::$totalPage>self::$rollNum && (self::$page-$now_roll_page)>=1){
 			if(self::$showPlate['page_head']===true){
-				self::$pageInfo['page_head']=1;
+				self::$pageInfo['page_head']=intval(1);
 			}
 			if(self::$showPlate['page_num']===true){
-				self::$pageInfo['page_num'][]=self::$pageSep;
+				self::$pageInfo['page_num'][]=intval(self::$pageSep);
 			}
 		}
 		if(self::$showPlate['page_num']===true){
@@ -108,7 +108,7 @@ class Page{
 				self::$pageInfo['page_num'][]=self::$pageSep;
 			}
 			if(self::$showPlate['page_end']===true){
-				self::$pageInfo['page_end']=self::$totalPage;
+				self::$pageInfo['page_end']=intval(self::$totalPage);
 			}
 		}
 		//下一页
@@ -116,6 +116,9 @@ class Page{
 			if(self::$showPlate['page_nex']===true){
 				self::$pageInfo['page_nex']=self::$page+1;
 			}
+		}
+		if(self::$showPlate['page_total']===true){
+			self::$pageInfo['page_nex']=self::$totalPage;
 		}
 	}	
 }
