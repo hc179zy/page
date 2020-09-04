@@ -97,7 +97,9 @@ class Page{
 						break;
 					}	
 				}else{
-					self::$pageInfo['page_num'][]=$page;
+					if($page>0 && self::$totalPage>1){
+						self::$pageInfo['page_num'][]=$page;
+					}
 				}
 				
 			}
